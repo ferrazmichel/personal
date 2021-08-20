@@ -2,18 +2,14 @@
 const keys = document.querySelectorAll(".key")
 
 function playNote(event) {
-  
-  let audioKeyCode = getKeyCode(event);
 
+  let audioKeyCode = getKeyCode(event);
+ 
   // typed or pressed key
   const key = document.querySelector(`.key[data-key="${audioKeyCode}"]`)
 
   // if key exists
-  const cantFoundAnyKey = !key
-
-  if(cantFoundAnyKey) {
-    return;
-  }
+  if(!key) { return; }
 
   addPlayingClass(key)
   playAudio(audioKeyCode)
@@ -48,7 +44,7 @@ function removePlayingClass(event) {
 
 function registerEvents() {
   // click with mouse
-  keys.forEach( function(key) {
+  keys.forEach((key) => {
     key.addEventListener("click", playNote)
     key.addEventListener("transitionend", removePlayingClass)
   })
